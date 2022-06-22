@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { actions } from "../../store/users/users.slice";
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { actions } from '../../store/users/users.slice'
 import * as S from './login.styled'
 
 const CreateAccount = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-    const onCreateAccountClicked = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        dispatch(actions.userLogin({ user: 'test', password: 'pass', isAdmin: false}));
-    }
+  const onCreateAccountClicked = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    dispatch(actions.userLogin({ user: 'test', password: 'pass', isAdmin: true }))
+  }
 
-    return(
+  return (
 
         <S.LofginForm onSubmit={onCreateAccountClicked}>
             <label>User name</label>
@@ -23,8 +23,7 @@ const CreateAccount = () => {
             <S.Submit type='submit' >Submit</S.Submit>
         </S.LofginForm>
 
-    )
+  )
 }
 
-export default CreateAccount;
-
+export default CreateAccount

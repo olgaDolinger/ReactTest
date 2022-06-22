@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const LofginForm = styled.form`
     display: flex;
@@ -9,9 +9,9 @@ export const LofginForm = styled.form`
     margin: auto;
     
     padding: 20px;
-`;
+`
 
 export const Submit = styled.button`
     width: 100px;
     sright: 10px;
-`;
+`

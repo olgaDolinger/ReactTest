@@ -1,5 +1,5 @@
 
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface User{
     currentUserId: Number,
@@ -8,18 +8,18 @@ export interface User{
 }
 
 const initUserData: UserData = {
-    user: '0',
-    password: '',
-    isAdmin: true,
+  user: '0',
+  password: '',
+  isAdmin: true
 }
 
-// TODO: temp: 
-//isUserLoggenIn: false - correct;
+// TODO: temp:
+// isUserLoggenIn: false - correct;
 
 const initialState: User = {
-    currentUserId: 0,
-    isUserLoggenIn: false,
-    userData: initUserData,
+  currentUserId: 0,
+  isUserLoggenIn: true,
+  userData: initUserData
 }
 
 export interface UserData {
@@ -29,19 +29,19 @@ export interface UserData {
 }
 
 export const usersSlice = createSlice(
-    {
-        name: 'userReducer',
-        initialState: initialState,
-        reducers:{
-            userLogin: (state: any, action: PayloadAction<UserData>) => {
-                const {user, password, isAdmin} = action.payload;
-                return {...state, userData: {user, password, isAdmin}, isUserLoggenIn: true }
-            },
-        }
+  {
+    name: 'userReducer',
+    initialState,
+    reducers: {
+      userLogin: (state: any, action: PayloadAction<UserData>) => {
+        const { user, password, isAdmin } = action.payload
+        return { ...state, userData: { user, password, isAdmin }, isUserLoggenIn: true }
+      }
     }
+  }
 )
 
-const {actions, reducer} = usersSlice;
+const { actions, reducer } = usersSlice
 
-export {actions};
-export default reducer;
+export { actions }
+export default reducer

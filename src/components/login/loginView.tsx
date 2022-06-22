@@ -1,40 +1,46 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
-import { actions } from "../../store/users/users.slice";
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
+import { actions } from '../../store/users/users.slice'
 import * as S from './login.styled'
 
 const LoginView = () => {
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+  // const [isSubmitActive, setSubmitAcive] = useState(false);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-    const dispatch = useDispatch();
-    const onLoginClicked = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        dispatch(actions.userLogin({ user: userName, password, isAdmin: false}));
-        setPassword('');
-        setUserName('');
-        navigate('/user');
+  const onLoginClicked = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    
+    if (userName.length === 0 && password.length === 0) {
+      return
     }
 
-    const handleUserNameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUserName(event.target.value);
-    }
+    dispatch(actions.userLogin({ user: userName, password, isAdmin: false }))
+    setPassword('')
+    setUserName('')
+    navigate('/user')
+  }
 
-    const handlePasswordChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
-    }
+  const handleUserNameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(event.target.value)
+  }
 
-    return(
+  const handlePasswordChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value)
+  }
+
+  return (
         <S.LofginForm onSubmit={onLoginClicked}>
                 <label>User name</label>
-                <input onChange={handleUserNameChanged} value={userName}/>
+                <input onChange={handleUserNameChanged} data-testid='login' value={userName}/>
                 <label>Password</label>
-                <input type='password' onChange={handlePasswordChanged} value={password}/>
-                <S.Submit  type='submit' >Submit</S.Submit>
+                <input type='password' data-testid='password' onChange={handlePasswordChanged} value={password}/>
+                <S.Submit type='submit' disabled={false}>Submit</S.Submit>
         </S.LofginForm>
-    )
+  )
 }
 
-export default LoginView;
+export default LoginView

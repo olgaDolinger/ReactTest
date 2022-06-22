@@ -1,14 +1,14 @@
-import React from "react";
-import * as S from "./userMenu.styled"; 
+import React from 'react'
+import * as S from './userMenu.styled'
 
 const UserMenu = () => {
-    return (
+  return (
         <>
             <S.Menu>
                 UserMenu
             </S.Menu>
         </>
-    );
+  )
 }
 
-export default UserMenu;
+export default UserMenu

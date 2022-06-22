@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import Main from './pages/main/main';
-import Promo from './pages/promo/promo';
-import Reports from './pages/reports/reports';
-import * as S from './App.styled';
-import Login from './pages/login/loginPage';
-import { useSelector } from 'react-redux';
-import { StoreInterface } from './store/store.interface';
-import UserPage from './pages/userPage/userPage';
-import UserMenu from './components/menu/userMenu/userMenu';
+import React, { useState } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Main from './pages/main/main'
+import Promo from './pages/promo/promo'
+import Reports from './pages/reports/reports'
+import * as S from './App.styled'
+import Login from './pages/login/loginPage'
+import { useSelector } from 'react-redux'
+import { StoreInterface } from './store/store.interface'
+import UserPage from './pages/userPage/userPage'
+import UserMenu from './components/menu/userMenu/userMenu'
 
+function App () {
+  const isUserLoggedIn = useSelector((store: StoreInterface) => store.user.isUserLoggenIn)
 
+  const [isUserMenuVisible, showUserMenu] = useState(isUserLoggedIn)
 
-function App() {
-    const isUserLoggedIn = useSelector((store: StoreInterface) => store.user.isUserLoggenIn);
+  const onUserClick = () => {
+    showUserMenu(!isUserMenuVisible)
+  }
 
-    const [isUserMenuVisible, showUserMenu] = useState(isUserLoggedIn);
-
-
-    const onUserClick = () => {
-        showUserMenu(!isUserMenuVisible)
-    }
-
-    return ( 
-    <> 
+  return (
+    <>
         <BrowserRouter>
             <S.NavBar>
                 <S.NavItem to='/'>
@@ -36,12 +33,12 @@ function App() {
                     <div>Reports</div>
                 </S.NavItem>
                 <S.UserMenu>
-                    {!isUserLoggedIn && 
+                    {!isUserLoggedIn &&
                         <S.NavItem to='/login'>
                             <div>Login</div>
                         </S.NavItem>
                     }
-                    {isUserLoggedIn && 
+                    {isUserLoggedIn &&
                         <S.NavItem to='/user'>
                             <S.UserButton onClick={onUserClick}>User</S.UserButton>
                             {isUserMenuVisible && <UserMenu/>}
@@ -49,7 +46,7 @@ function App() {
                     }
                 </S.UserMenu>
             </S.NavBar>
-    
+
             <Routes>
                 <Route path='/' element={< Main />}></Route>
                 <Route path='/promo' element={< Promo />}></Route>
@@ -59,7 +56,7 @@ function App() {
             </Routes>
         </BrowserRouter>
     </>
-    )
+  )
 }
 
-export default App;
+export default App

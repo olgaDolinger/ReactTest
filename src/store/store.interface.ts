@@ -1,5 +1,5 @@
-import { News } from "./news/news.slice";
-import { User } from "./users/users.slice";
+import { News } from './news/news.slice'
+import { User } from './users/users.slice'
 
 interface WithUser{
     user: User
