@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "jsx": "react",
+      "module": "es6",
+      "target": "es5",
+      "noImplicitAny": true,
+      "outDir": "./dist/",
+      "allowJs": true,
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "allowSyntheticDefaultImports": true,
+      "moduleResolution": "node",
+    },
+    "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
+    "include": ["src", "index.d.ts"],
+    "ts-node": {
+      "compilerOptions": {
+        "module": "CommonJS"
+      }
+    }
+}
