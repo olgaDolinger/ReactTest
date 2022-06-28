@@ -7,13 +7,12 @@ import * as S from './login.styled'
 const LoginView = () => {
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
-  // const [isSubmitActive, setSubmitAcive] = useState(false);
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const onLoginClicked = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    
+
     if (userName.length === 0 && password.length === 0) {
       return
     }
@@ -25,11 +24,11 @@ const LoginView = () => {
   }
 
   const handleUserNameChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(event.target.value)
+    setUserName(event.target.value.trim())
   }
 
   const handlePasswordChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value)
+    setPassword(event.target.value.trim())
   }
 
   return (

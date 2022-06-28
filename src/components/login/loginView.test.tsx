@@ -8,22 +8,21 @@ import { store } from '../../store/store'
 import { Router } from 'react-router'
 
 describe('LoginView', () => {
-  const history = createMemoryHistory()
+  let history = createMemoryHistory();
 
-  beforeEach(() => {
-    render(
-      <Provider store={store}>
-        <Router location={history.location} navigator={history}>
-          <LoginView/>
-        </Router>
-       
-      </Provider>);
+  const newRender = () => {
+      return render( 
+        <Provider store={store}>
+          <Router location={history.location} navigator={history}>
+            <LoginView/>
+          </Router>
+        </Provider>);
+    }
 
-  })
-  
+    
   describe('when user has account', () => {
     it('should login and password be empty on start', () => {
-
+      newRender();
       fireEvent.change(screen.getByTestId('login'), {target: { value: "user" }} )
       fireEvent.change(screen.getByTestId('password'), {target: { value: "pass" }} )
 
@@ -37,8 +36,10 @@ describe('LoginView', () => {
 
   describe('when a new user', () => {
     it('should login and password not be empty before submit', () => {
-      fireEvent.change(screen.getByTestId('login'), {target: { value: "" }} )
-      fireEvent.change(screen.getByTestId('password'), {target: { value: "" }} )
+        history = createMemoryHistory();
+        newRender();
+        fireEvent.change(screen.getByTestId('login'), {target: { value: ' ' }} )
+        fireEvent.change(screen.getByTestId('password'), {target: { value: ' ' }} )
 
       fireEvent.click(screen.getByRole('button'))
       expect(history.location.pathname).toBe('/');
